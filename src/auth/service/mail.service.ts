@@ -1,5 +1,4 @@
 import { EMAIL, EMAIL_PASSWORD } from "../config";
-console.log(EMAIL,EMAIL_PASSWORD );
 
 import nodemailer from "nodemailer"
 import SMTPTransport from "nodemailer/lib/smtp-transport";

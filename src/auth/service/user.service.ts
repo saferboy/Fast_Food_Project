@@ -36,6 +36,19 @@ export const findUserByemail = async (email: string): Promise<Users | null> => {
     return user
 }
 
+export const findUserByToken = async (token: string): Promise<Users | null>=> {
+    const sql = 'SELECT * from users WHERE token = $1'
+
+    const result = await client.query(sql, [token])
+
+    if(result.rowCount > 0) {
+        return result.rows[0] as Users
+    }
+
+    const user: Users = result.rows[0]
+    return user
+}
+
 export const excistUser = async (email: string): Promise<boolean> => {
     const sql = 'SELECT id, token from users WHERE email = $1'
     
