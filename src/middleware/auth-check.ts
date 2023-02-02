@@ -1,20 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import { Users } from "../model/allModel-exports";
 import { findUserByToken } from "../service/exportAll.service";
-
-const a = () => () => 12
-
-a()()
 
 export const authCheck = (isAdmin: boolean) => {
 
     return async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const token = req.header('authorization')
 
-            console.log(token);
-                        
-            const formatToken = token?.split(' ')[1]                        
+            const token = req.header('authorization')?.split(' ')[1]
+
 
             if (!token) {
                 return res.status(401).json({
@@ -22,7 +15,7 @@ export const authCheck = (isAdmin: boolean) => {
                 })
             }
 
-            const user = await findUserByToken(formatToken!)
+            const user = await findUserByToken(token!)
 
             if (!user) {
                 return res.status(401).json({
@@ -49,6 +42,5 @@ export const authCheck = (isAdmin: boolean) => {
             console.log(err)
         }
     }
-
 
 }
