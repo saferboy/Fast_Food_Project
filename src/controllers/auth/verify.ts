@@ -1,7 +1,7 @@
-import { SECRET_KEY, VERIFICATION_TIMEOUT } from "../config";
-import { VerificationDto } from "../model/allModel-exports";
-import { findUserByemail, verifiedUser, findVerificationById } from "../service/exportAll.service";
-import { getTimeOut } from "../../shared/utils/generateCode";
+import { SECRET_KEY, VERIFICATION_TIMEOUT } from "../../config";
+import { VerificationDto } from "../../model/allModel-exports";
+import { findUserByemail, verifiedUser, findVerificationById } from "../../service/exportAll.service";
+import { getTimeOut } from "../../utils/generateCode";
 import { Request, Response } from "express";
 import md5 from "md5";
 

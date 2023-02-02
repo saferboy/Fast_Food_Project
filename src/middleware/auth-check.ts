@@ -1,13 +1,20 @@
 import { Request, Response, NextFunction } from "express";
-import { findUserByToken } from "../auth/service/exportAll.service";
+import { Users } from "../model/allModel-exports";
+import { findUserByToken } from "../service/exportAll.service";
 
+const a = () => () => 12
 
-export const authCheck = (isAdmin: string) => {
+a()()
 
-    try {
-        return async (req: Request, res: Response, next: NextFunction) => {
+export const authCheck = (isAdmin: boolean) => {
 
+    return async (req: Request, res: Response, next: NextFunction) => {
+        try {
             const token = req.header('authorization')
+
+            console.log(token);
+                        
+            const formatToken = token?.split(' ')[1]                        
 
             if (!token) {
                 return res.status(401).json({
@@ -15,7 +22,8 @@ export const authCheck = (isAdmin: string) => {
                 })
             }
 
-            const user = await findUserByToken(token)
+            const user = await findUserByToken(formatToken!)
+
             if (!user) {
                 return res.status(401).json({
                     message: 'Invalid token'
@@ -32,10 +40,15 @@ export const authCheck = (isAdmin: string) => {
 
             res.locals.user = user
             next()
-        } 
+
+        }
+        catch (err) {
+            res.status(500).json({
+                message: 'Invalid server error'
+            })
+            console.log(err)
+        }
     }
-    catch (err) {
-        console.log(err)
-    }
-    
+
+
 }

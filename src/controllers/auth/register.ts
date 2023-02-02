@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { getTimeOut, generateCode } from "../../shared/utils/generateCode";
+import { getTimeOut, generateCode } from "../../utils/generateCode";
 
-import { Users, RegisterDto} from "../model/allModel-exports"
-import { VERIFICATION_TIMEOUT } from "../config";
+import { Users, RegisterDto} from "../../model/allModel-exports"
+import { VERIFICATION_TIMEOUT } from "../../config";
 import {
     cleanVerification,createUser,createVerification, sendEmail, excistUser
-} from "../service/exportAll.service";
+} from "../../service/exportAll.service";
 
 export default async (req: Request, res: Response) => {
     try {

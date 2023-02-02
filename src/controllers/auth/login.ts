@@ -1,5 +1,5 @@
-import { LoginDto, Users } from "../model/allModel-exports";
-import { findUserByemail } from "../service/user.service";
+import { LoginDto, Users } from "../../model/allModel-exports";
+import { findUserByemail } from "../../service/user.service";
 import { Request, Response } from "express";
 
 export default async (req: Request, res: Response) => {

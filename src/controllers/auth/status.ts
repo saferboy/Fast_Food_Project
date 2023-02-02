@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import { findVerificationById } from "../service/exportAll.service";
-import { getTimeOut } from "../../shared/utils/generateCode";
-import { VERIFICATION_TIMEOUT } from "../config";
-import { Verification } from "../model/verification";
+import { findVerificationById } from "../../service/exportAll.service";
+import { getTimeOut } from "../../utils/generateCode";
+import { VERIFICATION_TIMEOUT } from "../../config";
 
 export default async ( req: Request, res: Response) => {
 

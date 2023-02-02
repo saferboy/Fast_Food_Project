@@ -1,5 +1,5 @@
 // import database from "../database/database"
-import { RegisterDto, Users, Role } from "../model/allModel-exports"
+import { RegisterDto, Users, Role, updateUserInfo } from "../model/allModel-exports"
 import md5 from "md5"
 import { client } from "../database/database"
 
@@ -32,21 +32,20 @@ export const findUserByemail = async (email: string): Promise<Users | null> => {
         return  result.rows[0] as Users
     }
 
-    const user: Users = result.rows[0]
-    return user
+    // const user: Users = result.rows[0]
+    return null
 }
 
 export const findUserByToken = async (token: string): Promise<Users | null>=> {
     const sql = 'SELECT * from users WHERE token = $1'
 
     const result = await client.query(sql, [token])
-
+    
     if(result.rowCount > 0) {
         return result.rows[0] as Users
     }
 
-    const user: Users = result.rows[0]
-    return user
+    return null
 }
 
 export const excistUser = async (email: string): Promise<boolean> => {
@@ -64,6 +63,16 @@ export const verifiedUser = async(userId: number, token: string, role: Role): Pr
     const sql = 'UPDATE users SET token = $1, role = $2 WHERE id = $3 RETURNING *'
     
     const result = await client.query(sql, [token, role, userId])
+
+    return result.rows[0]
+}
+
+
+export const updateUser = async (userInfo: updateUserInfo) => {
+    const sql = 'UPDATE users SET name = $1, geo = $2, address = $3, phone = $4 WHERE token = $5 RETURNING *'
+    const { name, address, geo, phone, token } = userInfo
+
+    const result = await client.query(sql, [name, address, geo, phone, token] )
 
     return result.rows[0]
 }

@@ -10,3 +10,10 @@ export interface Users {
     role:       string
 }
 
+export interface updateUserInfo {
+    name:       string,
+    phone:      string,
+    token:      string,
+    geo:        string,
+    address:    string,
+}
