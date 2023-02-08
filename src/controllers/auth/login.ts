@@ -18,7 +18,7 @@ export default async (req: Request, res: Response) => {
                 message: 'Account not verified, please verify account'
             })
         }
-        if (user.password == loginDto.password) {
+        if (user.password != loginDto.password) {
             return res.status(400).json({
                 message: 'Email or password wrong'
             })

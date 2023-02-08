@@ -1,7 +1,7 @@
 import { Verification } from "../model/verification";
 import  { client} from "../database/database";
 import {v4 as uuid} from "uuid"
-import { getTimeOut } from "../utils/generateCode";
+// import { getTimeOut } from "../utils/generateCode";
 
 export const createVerification = async ( code: string, email: string): Promise<Verification | null> => {
     
